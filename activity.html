@@ -1,0 +1,268 @@
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+<html>
+	<HEAD>
+		<link rel="stylesheet" href="jqwidgets/styles/jqx.base.css" type="text/css">
+		<link rel="stylesheet" href="jqwidgets/styles/jqx.classic.css" type="text/css">
+		<link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+		<script type="text/javascript" src="jqwidgets/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="jqwidgets/jqxcore.js"></script>
+		<script type="text/javascript" src="jqwidgets/jqxbuttons.js"></script>
+		<script type="text/javascript" src="jqwidgets/jqxscrollbar.js"></script>
+		<script type="text/javascript" src="jqwidgets/jqxmenu.js"></script>
+		<script type="text/javascript" src="jqwidgets/jqxdata.js"></script>
+		<script type="text/javascript" src="jqwidgets/jqxgrid.js"></script>
+		<script type="text/javascript" src="jqwidgets/jqxgrid.selection.js"></script>
+		<script type="text/javascript" src="jqwidgets/jqxdatetimeinput.js"></script>
+		<script type="text/javascript" src="jqwidgets/jqxcalendar.js"></script>
+		<script type="text/javascript" src="jqwidgets/jqxtooltip.js"></script>
+		<script type="text/javascript" src="jqwidgets/jqxbuttons.js"></script>
+		<script type="text/javascript" src="jqwidgets/globalization/jquery.global.js"></script>
+		<script type="text/javascript" src="jqwidgets/jqxinput.js"></script>
+		<script type="text/javascript" src="jqwidgets/jqxlistbox.js"></script>
+		<script type="text/javascript" src="jqwidgets/jqxgrid.pager.js"></script>
+		<script type="text/javascript" src="jqwidgets/jqxdropdownlist.js"></script>
+		<script type="text/javascript" src="jqwidgets/jqxlistbox.js"></script>
+	</HEAD>
+
+	<BODY>
+		<div id="linkList">
+				<div id="lselect">
+				<ul>
+					<li>
+						<a href="eventlist.html">Events</a>
+					</li>
+					<li>
+						<a href="workshoptemplate.html">Workshop Templates</a>
+					</li>
+					<li>
+						<a href="activity.html">Activities</a>
+					</li>
+					<li>
+						<a href="resource">Resources</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="intro">
+			<div id="pageHeader"></div>
+		</div>
+
+		<div id="supportingText">
+			<div id="explanation">
+				<h3><span>List of Activities</span></h3>
+					<div id="EventTable"></div>
+			</div>
+			<div id="explanation">
+				<h3><span>Activity Form</span></h3>
+				<form id="event" method ="post" action = "createActivity.php">
+				<table><tr>
+							
+							<td>Activity Name:
+							<br>
+							<input type="text" id="activity_name"/>
+							</td>
+							<td>Duration:
+							<br>
+							<input type="text" id="activity_time">
+							</td>
+							<tr>
+							<td>Notes:
+							<br>
+							<input type="text" size="270" id="activity_notes"/>
+							</td>
+							</tr>
+						</tr>
+					<tr>
+					<td>Objectives:
+							<br>
+							<input type="text" size="180" id="activity_objective"/>
+					</td>
+							
+						
+					</tr>
+					
+				</table>
+			<br><br>
+				<!-- 				<a style='margin-left: 25px;' target="_blank" href="#" id='btn_new'>Add New (Linked)</a> -->
+				<input type="submit" value="Submit" id='Btn_submit'/>
+				<input type="button" value="Save As..." id='Btn_SaveAs'/>
+				<input type="button" value="Update" id='Btn_Update'/>
+				<input type="button" value="Delete" id='Btn_Delete'/>
+				</form>
+			</div>
+
+			<div id="footer">
+				Copyright&copy;2013 PeerNetBC
+			</div>
+		</div>
+		<script>
+			$(document).ready(function() {
+				// prepare the data
+				var source = {
+					datatype : "json",
+					datafields : [{
+						name : 'aid'
+					}, {					
+						name : 'Name'
+					}, {
+						name : 'Duration'
+					}, {
+						name : 'Objective'
+					}, {
+						name : 'Notes'
+					}],
+					url : 'data_activities.php'
+				};
+				$("#EventTable").jqxGrid({
+					selectionmode : 'singlerow ',
+					width : '100%',
+					source : source,
+					pageable : true,
+					theme : 'classic',
+					columns : [{
+						text : '#',
+						datafield : 'aid',
+						width : 40
+					}, {
+						text : 'Activity Name',
+						datafield : 'Name',
+						width : 170
+					}, {
+						text : 'Duration',
+						datafield : 'Duration',
+						width : 60
+					}, {
+						text : 'Objective',
+						datafield : 'Objective',
+						width : 180
+					}, {
+						text : 'Notes',
+						datafield : 'Notes',
+						width : 250
+					
+					}]
+				});
+			});
+		</script>
+		<script type="text/javascript">
+			//Create buttons
+			$(document).ready(function() {
+				$("#Btn_SaveAs").jqxButton({
+					width : '120px',
+					height : '35px',
+					theme : 'darkblue'
+				});
+				$("#Btn_Update").jqxButton({
+					width : '120px',
+					height : '35px',
+					theme : 'darkblue'
+				});
+				$("#Btn_Delete").jqxButton({
+					width : '120px',
+					height : '35px',
+					theme : 'darkblue'
+				});
+				$("#Btn_SaveAs").bind('click', function() {
+					alert('We are working. Saving will be available soon')
+
+				});
+				$("#Btn_Update").bind('click', function() {
+					alert('We are working. Updating event will be available soon')
+				});
+				$("#Btn_Delete").bind('click', function() {
+					alert('We are working. Deleting an event will be available soon')
+				});
+				$("#Btn_submit").jqxButton({
+					width : '120px',
+					height : '35px',
+					theme : 'darkblue'
+				});
+				// Create a Menu in the left part of the screen
+				$("#Menu").jqxMenu({
+					width : '120',
+					mode : 'vertical'
+				});
+				//Event Form Elements
+				$("#dateinput").jqxDateTimeInput({
+					width : '170px',
+					height : '25px'
+				});
+				$("#activity_name").jqxInput({
+										placeHolder : "Activity Name",
+										height : 25,
+										width : 200,
+										minLength : 1
+				});
+
+									
+				$("#activity_notes").jqxInput({
+										placeHolder : "Enter Notes",
+										height : 25,
+										width : 600,
+										minLength : 1,
+										
+									});
+				$("#activity_time").jqxInput({
+										placeHolder : "Enter Duration",
+										height : 25,
+										width : 200,
+										minLength : 1,
+										
+									});
+				$("#activity_objective").jqxInput({
+										placeHolder : "Enter Objectives",
+										height : 25,
+										width : 600,
+										minLength : 1,
+										
+									});
+			
+									
+				// init buttons.
+				//$("#getDateButton").jqxButton();
+				//$("#setDateButton").jqxButton();
+				// set new date.
+				// $("#setDateButton").click(function () {
+				// var date = new Date();
+				// date.setFullYear(2012, 5, 6);
+				// $('#dateinput').jqxDateTimeInput('setDate', date);
+				// });
+				// // get date.
+				// $("#getDateButton").click(function () {
+				// var date = $('#datetinput').jqxDateTimeInput('getDate');
+				// alert(date);
+				// });
+			});
+
+		</script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				// Create Link Button.
+				$("#btn_new").jqxLinkButton({
+					width : '120',
+					height : '35'
+				});
+			});
+		</script>
+		<script type = "text/javascript">
+			$("#EventTable").bind('rowselect', function(event) {
+				var selectedRowIndex = event.args.rowindex;
+				//var selectedName = $("#EventTable").jqxGrid('getcolumn', 'name').text;
+				var selectedName = $("#EventTable").jqxGrid('getcellvalue', selectedRowIndex, 'Name');
+				$("#activity_name").val(selectedName);
+				var selectedLocation = $("#EventTable").jqxGrid('getcellvalue', selectedRowIndex, 'Objective');
+				$("#activity_objective").val(selectedLocation);
+				var selectedDate = $("#EventTable").jqxGrid('getcellvalue', selectedRowIndex, 'Duration');
+				$("#activity_time").val(selectedDate);
+				var selectedSummary = $("#EventTable").jqxGrid('getcellvalue', selectedRowIndex, 'Notes');
+				$("#activity_notes").val(selectedSummary);
+			});
+			$("#jqxgrid").bind('rowunselect', function(event) {
+				var unselectedRowIndex = event.args.rowindex;
+			});
+		</script>
+
+	</BODY>
+</html>

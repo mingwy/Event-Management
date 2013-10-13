@@ -1,0 +1,54 @@
+<html>
+<HEAD>
+<link rel="stylesheet" href="jqwidgets/styles/jqx.base.css" type="text/css">
+<link rel="stylesheet" href="jqwidgets/styles/jqx.classic.css" type="text/css">
+<script type="text/javascript" src="jqwidgets/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxmenu.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxdata.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxgrid.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxgrid.selection.js"></script>
+    
+</HEAD>
+<BODY>
+<div id="jqxgrid">
+</div>
+<script>
+$(document).ready(function () {
+    // prepare the data
+    var source ={
+        datatype: "json",
+        datafields: [{ name: 'CompanyName' },{ name: 'ContactName' },{ name: 'ContactTitle' },{ name: 'Address' },{ name: 'City' },],
+        url: 'data.php'
+    };
+    $("#jqxgrid").jqxGrid({
+        source: source,
+        theme: 'classic',
+        columns: [{ text: 'Company Name', datafield: 'CompanyName', width: 250 },{ text: 'ContactName', datafield: 'ContactName', width: 150 },{ text: 'Contact Title', datafield: 'ContactTitle', width: 180 },{ text: 'Address', datafield: 'Address', width: 200 },{ text: 'City', datafield: 'City', width: 120 }]
+    });
+	
+	$.get('data.php' , function (data) {
+			//$("#jqxgrid").html(data[0].City)
+			//$("#myButton").val(data[0].City);
+			//alert(data);
+	} , 'json');
+});
+</script>
+
+<?php
+// Hello world in PHP
+ print("Hello World");
+?>
+ <script type="text/javascript">
+        $(document).ready(function () {
+            $("#myButton").jqxButton({ width: '120px', height: '35px', theme: 'darkblue'});
+			
+        });
+    </script>
+	
+    <input type="button" value="Add New Event" id='myButton'/>
+
+</BODY>
+</html>
